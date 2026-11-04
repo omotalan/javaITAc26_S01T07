@@ -41,4 +41,18 @@ public class TreballadorTest {
         double expected = 160 * 100 + 118;
         assertEquals(expected, t.calcularSou(160), 0.0001);
     }
+
+    @Test
+    @SuppressWarnings("deprecation")
+    void presencialDeprecatedSenseBenzina() {
+        TreballadorPresencial t = new TreballadorPresencial("A", "B", 350.0);
+        assertEquals(160 * 350.0, t.calcularSouSenseCostFix(160), 0.0001);
+    }
+
+    @Test
+    @SuppressWarnings("deprecation")
+    void onlineDeprecatedSenseInternet() {
+        TreballadorOnline t = new TreballadorOnline("A", "B", 375.0);
+        assertEquals(160 * 375.0, t.calcularSouSenseCostFix(160), 0.0001);
+    }
 }
