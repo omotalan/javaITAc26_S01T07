@@ -19,5 +19,8 @@ public abstract class Treballador {
         return horesTreballades * preuHora;
     }
 
-    public abstract double calcularSou(double horesTreballades, double tarifaNet);
+    public abstract double calcularSou(double horesTreballades, double costFix);
+
+    @Deprecated
+    public abstract double calcularSouSenseCostFix(double horesTreballades);
 }

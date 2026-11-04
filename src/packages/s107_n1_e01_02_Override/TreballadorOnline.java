@@ -8,13 +8,19 @@ public class TreballadorOnline extends Treballador {
     }
 
     @Override
-    public double calcularSou(double horesTreballades, double tarifaNet) {
-        return (horesTreballades * this.getPreuHora()) + tarifaNet;
+    public double calcularSou(double horesTreballades, double costFix) {
+        return (horesTreballades * this.getPreuHora()) + costFix;
     }
 
     // Overloaded method as default parameter
     @Override
     public double calcularSou(double horesTreballades) {
         return calcularSou(horesTreballades, TARIFAINTERNET);
+    }
+
+    @Deprecated
+    @Override
+    public double calcularSouSenseCostFix(double horesTreballades) {
+        return (horesTreballades * this.getPreuHora());
     }
 }

@@ -8,13 +8,19 @@ public class TreballadorPresencial extends Treballador {
     }
 
     @Override
-    public double calcularSou(double horesTreballades, double benzina) {
-        return (horesTreballades * this.getPreuHora()) + benzina;
+    public double calcularSou(double horesTreballades, double costFix) {
+        return (horesTreballades * this.getPreuHora()) + costFix;
     }
 
     // Overloaded method as default parameter
     @Override
     public double calcularSou(double horesTreballades) {
         return calcularSou(horesTreballades, BENZINA);
+    }
+
+    @Deprecated
+    @Override
+    public double calcularSouSenseCostFix(double horesTreballades) {
+        return (horesTreballades * this.getPreuHora());
     }
 }
