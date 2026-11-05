@@ -9,11 +9,19 @@ import java.util.stream.Collectors;
 public class JsonSerializerProcessor {
 
     // Override serialize method with standard directory path from the annotation
+    // Uses Java Reflection to dynamically detect and read annotations at runtime.
     public static void serialize(Object object) {
         Class<?> cls = object.getClass();
-        if (!cls.isAnnotationPresent(JsonSerializable.class)) return;
+        // Demonstration of Reflection: Check if JVM registered the annotation
+        if (!cls.isAnnotationPresent(JsonSerializable.class)) {
+            System.out.printf("The class {%s} is not annotated with @JsonSerializable", cls.getSimpleName());
+            return;
+        }
 
+        // Demonstration of Reflection: Extracting annotation parameters dynamically
         JsonSerializable annotation = cls.getAnnotation(JsonSerializable.class);
+        System.out.printf("[Reflection] Success! Found @JsonSerializable annotation target directory: '%s'\n", annotation.directory());
+
         serialize(object, annotation.directory());
     }
 
@@ -23,7 +31,8 @@ public class JsonSerializerProcessor {
 
         if (!cls.isAnnotationPresent(JsonSerializable.class)) {
             System.out.printf("The class {%s} is not annotated with @JsonSerializable", cls.getSimpleName());
-            return;        }
+            return;
+        }
 
         try {
             String jsonContent = formatJsonInput(object);
